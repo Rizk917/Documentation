@@ -94,13 +94,13 @@ return languages;
 }
 
 const convertStrToArr = (social_arr) => {
-const tableau = social_arr.split(",");
-return tableau;
+const xxx = social_arr.split(",");
+return xxx;
 }
 
 const convertArrToStr = (languages) => {
-const str = languages.join();
-return str;
+const xyz = languages.join();
+return xyz;
 }
 
 const sortArr = (social_arr) => {
