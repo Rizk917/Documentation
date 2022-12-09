@@ -9,7 +9,14 @@
             <label for="name">name : </label><input type="text" name="name" id="name"/>
             <label for="surname">surname : </label><input type="text" name="surname" id="surname"/>
             <label for="city">city : </label><input type="text" name="city" id="city"/>
-            <button  name="validate" id="validate">Validate</button>
+            <button  name="validate" onclick="myFunction()" id="validate">Validate</button>
         </form>
     </body>
+    <script>function myFunction() {
+        var x = document.getElementById("name").value;
+        var y = document.getElementById("surname").value;
+        var z = document.getElementById("city").value;
+        alert("First Name: "+x+"\n Last Name: "+y+"\n City: "+z);
+      
+      }</script>
 </html>

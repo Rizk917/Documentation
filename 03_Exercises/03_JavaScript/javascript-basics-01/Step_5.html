@@ -8,7 +8,13 @@
         <form>
             <label for="first_number">first number : </label><input type="text" id="first_number" name="first_number"/><br/>
             <label for="second_number">second number : </label><input type="text" id="second_number" name="second_number"/><br/>
-            <button  id="validate" name ="validate">validate</button>
+            <button  id="validate"  onclick="myFunction()" name ="validate">validate</button>
         </form>
     </body>
+    <script>function myFunction() {
+        var x = document.getElementById("first_number").value;
+        var y = document.getElementById("second_number").value;
+        alert(x*y);
+      
+      }</script>
 </html>
