@@ -20,10 +20,24 @@ ______________________________________
 INSERT INTO graduates (ID, name,Age, Gender, Points)
 SELECT ID, name,Age, Gender, Points
 FROM students
-WHERE name="Basma";
+WHERE name="Layal";
 ______________________________________
-UPDATE graduates  SET Graduation="25/07/2022" WHERE name="Basma"
+UPDATE graduates  SET Graduation="08/09/2018" WHERE name="Layal"
 ______________________________________
 DELETE from students WHERE name="Layal"
 _______________________________________
 ______________________________________
+INSERT INTO Detailtable
+(
+  ID,
+  Name,
+  Company,
+  Date
+)
+SELECT
+employees.ID, employees.Name, employees.Company,companies.Date
+FROM employees
+INNER JOIN companies
+ON employees.Company=companies.Name
+______________________________________
+SELECT Company FROM employees WHERE Role="Graphic Designer":];
