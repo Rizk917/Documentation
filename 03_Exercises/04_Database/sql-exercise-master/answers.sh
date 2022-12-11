@@ -41,6 +41,15 @@ INNER JOIN companies
 ON employees.Company=companies.Name
 ______________________________________
 SELECT name FROM Detailtable WHERE date<2000
-
-
+______________________________________
 SELECT Company FROM employees WHERE Role="Graphic Designer";
+______________________________________
+SELECT max(Name) FROM students WHERE Points;
+______________________________________
+SELECT AVG(Points) FROM students;
+______________________________________
+SELECT COUNT(Points) FROM students WHERE Points="500";
+______________________________________
+select Name from students where name like '%s%'
+______________________________________
+SELECT name, Points FROM students ORDER BY Points DESC;
