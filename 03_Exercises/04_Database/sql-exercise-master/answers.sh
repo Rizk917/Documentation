@@ -40,4 +40,7 @@ FROM employees
 INNER JOIN companies
 ON employees.Company=companies.Name
 ______________________________________
-SELECT Company FROM employees WHERE Role="Graphic Designer":];
+SELECT name FROM Detailtable WHERE date<2000
+
+
+SELECT Company FROM employees WHERE Role="Graphic Designer";
