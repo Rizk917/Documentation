@@ -32,16 +32,14 @@ function startApp(name) {
  * @returns {void}
  */
 function onDataReceived(text) {
-  if (text === "quit\n") {
-    quit();
-  }
   //added exit
-  else if (text === "exit\n") {
+  if (text === "quit\n" || text === "exit\n") {
     quit();
   } else if (text === "help\n") {
-    help();// calling help function
-  } else if (text === "hello\n") {
-    hello();
+    help(); // calling help function
+  } else if (text.substring(0 ,5) === "hello") {
+    let batata=
+    hello(text.replace("\n", "").substring(6));
   } else {
     unknownCommand(text);
   }
@@ -63,9 +61,9 @@ function unknownCommand(c) {
  *
  * @returns {void}
  */
-function hello() {
-  console.log("hello!");
-}
+// function hello() {
+//   console.log("hello!");
+// }
 
 /**
  * Exits the application
@@ -79,9 +77,14 @@ function quit() {
 
 // The following line starts the application
 startApp("Mhmd Rizk");
-//help command  
+//help command
 function help() {
   console.log(" You can use the following commands:");
   console.log(" Hello for greetings");
   console.log(" exit ot quit to close the app");
+}
+ //new hello function
+function hello(name1) {
+console.log("hello "+name1+"!")
+
 }
