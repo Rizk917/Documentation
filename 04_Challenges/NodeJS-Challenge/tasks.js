@@ -37,12 +37,16 @@ function onDataReceived(text) {
   if (text === 'quit\n') {
     quit();
   }
+  //added exit
+  else if (text === 'exit\n') {
+    quit();}
   else if(text === 'hello\n'){
     hello();
   }
   else{
     unknownCommand(text);
   }
+
 }
 
 
@@ -83,6 +87,3 @@ startApp("Mhmd Rizk");
 
 
 
-function buyBread(){
-  console.log('you have bought bread')
-}
