@@ -39,10 +39,10 @@ function onDataReceived(text) {
     help(); // calling help function
   } else if (text.substring(0, 5) === "hello") {
     let batata = hello(text.replace("\n", "").substring(6));
-  } 
-  else if (text === "list\n") {
-    list();} // calling list function
-    else {
+  } else if (text === "list\n") {
+    list();
+  } // calling list function
+  else {
     unknownCommand(text);
   }
 }
@@ -89,12 +89,11 @@ function help() {
 function hello(newName) {
   console.log("hello " + newName + "!");
 }
+const arr = ["eat batata", "drink pepsi", "wash hands"];
 
 //list function
-function list(){
- const arr =["eat batata","drink pepsi","wash hands"];
- for(let x=0;x<arr.length;x++){
-  console.log( x +"."+arr[x])
- }
-
+function list() {
+  for (let x = 0; x < arr.length; x++) {
+    console.log(x + "." + arr[x]);
+  }
 }
