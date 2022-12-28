@@ -79,7 +79,7 @@ function quit() {
 
 // The following line starts the application
 startApp("Mhmd Rizk");
-//help command 
+//help command  
 function help() {
   console.log(" You can use the following commands:");
   console.log(" Hello for greetings");
