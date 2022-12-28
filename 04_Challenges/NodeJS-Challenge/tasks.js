@@ -38,10 +38,22 @@ function onDataReceived(text) {
   } else if (text === "help\n") {
     help(); // calling help function
   } else if (text.substring(0, 5) === "hello") {
-    let batata = hello(text.replace("\n", "").substring(6));
+   hello(text.replace("\n", "").substring(6));
   } else if (text === "list\n") {
     list();
   } // calling list function
+  else if (text === "add\n") {
+    console.log("Error nothing after add command!")
+  } // calling error for add
+  else if (text.substring(0, 3) === "add") {
+    add(text.replace("\n", "").substring(4));
+  } // calling add
+  else if (text === "remove\n") {
+    remove(arr.length-1)
+  } // to remove last item in list
+  else if (text.substring(0, 6) === "remove") {
+    remove(text.trim().substring(7));
+  } // to remove specific item from list
   else {
     unknownCommand(text);
   }
@@ -82,7 +94,7 @@ startApp("Mhmd Rizk");
 //help command
 function help() {
   console.log(
-    " You can use the following commands:\nHello + 'name' for greetings\nexit ot quit to close the app\nhelp to get all options "
+    " You can use the following commands:\nHello + 'name' for greetings\nexit ot quit to close the app\nhelp to get all options \nadd to add item to list \nremove to remove last item or put number for specific item \nlist to check the list"
   );
 }
 //new hello function
@@ -96,4 +108,12 @@ function list() {
   for (let x = 0; x < arr.length; x++) {
     console.log(x + "." + arr[x]);
   }
+}
+//add function to add items to list
+function add(value){
+arr.push(value);
+}
+// to remove item from list
+function remove(value){
+arr.splice(value, 1);
 }
