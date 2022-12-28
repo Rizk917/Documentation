@@ -37,9 +37,8 @@ function onDataReceived(text) {
     quit();
   } else if (text === "help\n") {
     help(); // calling help function
-  } else if (text.substring(0 ,5) === "hello") {
-    let batata=
-    hello(text.replace("\n", "").substring(6));
+  } else if (text.substring(0, 5) === "hello") {
+    let batata = hello(text.replace("\n", "").substring(6));
   } else {
     unknownCommand(text);
   }
@@ -79,12 +78,11 @@ function quit() {
 startApp("Mhmd Rizk");
 //help command
 function help() {
-  console.log(" You can use the following commands:");
-  console.log(" Hello for greetings");
-  console.log(" exit ot quit to close the app");
+  console.log(
+    " You can use the following commands:\nHello + name for greetings\nexit ot quit to close the app\nhelp to get all options "
+  );
 }
- //new hello function
+//new hello function
 function hello(newName) {
-console.log("hello "+newName+"!")
-
+  console.log("hello " + newName + "!");
 }
