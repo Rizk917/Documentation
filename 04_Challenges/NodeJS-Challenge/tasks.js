@@ -79,4 +79,10 @@ function quit(){
 }
 
 // The following line starts the application
-startApp("Jad Sarout")
+startApp("Mhmd Rizk");
+
+
+
+function buyBread(){
+  console.log('you have bought bread')
+}
