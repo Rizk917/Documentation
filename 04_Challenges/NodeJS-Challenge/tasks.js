@@ -84,7 +84,7 @@ function help() {
   console.log(" exit ot quit to close the app");
 }
  //new hello function
-function hello(name1) {
-console.log("hello "+name1+"!")
+function hello(newName) {
+console.log("hello "+newName+"!")
 
 }
