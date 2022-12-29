@@ -38,20 +38,23 @@ function onDataReceived(text) {
   } else if (text === "help\n") {
     help(); // calling help function
   } else if (text.substring(0, 5) === "hello") {
-   hello(text.replace("\n", "").substring(6));
+    hello(text.replace("\n", "").substring(6));
   } else if (text === "list\n") {
     list();
   } // calling list function
   else if (text === "add\n") {
-    console.log("Error nothing after add command!")
+    console.log("Error nothing after add command!");
   } // calling error for add
   else if (text.substring(0, 3) === "add") {
     add(text.replace("\n", "").substring(4));
   } // calling add
   else if (text === "remove\n") {
-    remove(arr.length-1)
+    remove(arr.length - 1);
   } // to remove last item in list
-  else if (text.substring(0, 6) === "remove") {
+  else if (text.trim().substring(7) > arr.length - 1) {
+console.log("Number does not exist")
+
+  } else if (text.substring(0, 6) === "remove") {
     remove(text.trim().substring(7));
   } // to remove specific item from list
   else {
@@ -110,10 +113,10 @@ function list() {
   }
 }
 //add function to add items to list
-function add(value){
-arr.push(value);
+function add(value) {
+  arr.push(value);
 }
 // to remove item from list
-function remove(value){
-arr.splice(value, 1);
+function remove(value) {
+  arr.splice(value, 1);
 }
