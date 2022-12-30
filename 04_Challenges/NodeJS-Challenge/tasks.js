@@ -120,7 +120,7 @@ startApp("Mhmd Rizk");
 //help command
 function help() {
   console.log(
-    " You can use the following commands:\nHello + 'name' for greetings\nexit ot quit to close the app\nhelp to get all options \nadd to add item to list \nremove to remove last item or put number for specific item \nlist to check the list"
+    " You can use the following commands:\nHello + 'name' for greetings\nexit ot quit to close the app\nhelp to get all options \nadd to add item to list \nremove to remove last item or put number for specific item \nlist to check the list\n use check/uncheck with the number of item in the list to mark as done or not done"
   );
 }
 //new hello function
