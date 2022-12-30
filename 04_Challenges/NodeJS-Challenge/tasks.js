@@ -52,25 +52,34 @@ function onDataReceived(text) {
     remove(arr.length - 1);
   } // to remove last item in list
   else if (text.trim().substring(7) > arr.length - 1) {
-console.log("Number does not exist") // better remove
-
+    console.log("Number does not exist"); // better remove
   } else if (text.substring(0, 6) === "remove") {
     remove(text.trim().substring(7));
   } // to remove specific item from list
   else if (text === "edit\n") {
     console.log("Error nothing to edit");
-  }//edit error
+  } //edit error
   else if (text.substring(0, 4) === "edit") {
-   const editarr=text.split(" "); 
-    if (!isNaN(editarr[1])){
-      let batata=editarr.slice(2).join(" ");
-      edit(editarr[1],batata)
-    }
-    else {
-      edit(arr.length-1,text.substring(4));
-    }
-  } // to edit array at specific part
-  else {
+    text.replace("\n", "");
+    const editarr = text.split(" ");
+    if (!isNaN(editarr[1])) {
+      let batata = editarr.slice(2).join(" ");
+      edit(editarr[1], batata); // to edit array at specific part
+    } else {
+      text.replace("\n", "");
+      edit(arr.length - 1, text.substring(4));
+    } // to edit array last
+  } else if (text === "check\n") {
+    console.log("error!");
+  } else if (text.substring(0, 5) === "check") {
+    // check task
+    check(text.trim().substring(6));
+  } else if (text === "uncheck\n") {
+    console.log("error!");
+  } else if (text.substring(0, 7) === "uncheck") {
+    // check task
+    unCheck(text.trim().substring(8));
+  } else {
     unknownCommand(text);
   }
 }
@@ -106,6 +115,7 @@ function quit() {
 }
 
 // The following line starts the application
+
 startApp("Mhmd Rizk");
 //help command
 function help() {
@@ -121,8 +131,11 @@ const arr = ["eat batata", "drink pepsi", "wash hands"];
 
 //list function
 function list() {
+  if (arrCheck[arr.length - 1] === undefined) {
+    arrCheck[arr.length - 1] = "[]";
+  }
   for (let x = 0; x < arr.length; x++) {
-    console.log(x + "." + arr[x]);
+    console.log(x + "." + arrCheck[x] + arr[x]);
   }
 }
 //add function to add items to list
@@ -133,4 +146,21 @@ function add(value) {
 function remove(value) {
   arr.splice(value, 1);
 }
+//edit function
+function edit(value, text) {
+  arr[value] = text;
+}
 
+const arrCheck = [];
+for (let i = 0; i < arr.length; i++) {
+  arrCheck[i] = "[]";
+}
+//check
+function check(index) {
+  if (index == "\n") {
+    console.log("Error");
+  } else arrCheck[Number(index)] = arrCheck[Number(index)].replace("[]", "[✓]");
+}
+function unCheck(index) {
+  arrCheck[Number(index)] = arrCheck[Number(index)].replace("[✓]", "[]");
+}
