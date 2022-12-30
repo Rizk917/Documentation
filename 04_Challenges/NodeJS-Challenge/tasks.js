@@ -52,11 +52,24 @@ function onDataReceived(text) {
     remove(arr.length - 1);
   } // to remove last item in list
   else if (text.trim().substring(7) > arr.length - 1) {
-console.log("Number does not exist")
+console.log("Number does not exist") // better remove
 
   } else if (text.substring(0, 6) === "remove") {
     remove(text.trim().substring(7));
   } // to remove specific item from list
+  else if (text === "edit\n") {
+    console.log("Error nothing to edit");
+  }//edit error
+  else if (text.substring(0, 4) === "edit") {
+   const editarr=text.split(" "); 
+    if (!isNaN(editarr[1])){
+      let batata=editarr.slice(2).join(" ");
+      edit(editarr[1],batata)
+    }
+    else {
+      edit(arr.length-1,text.substring(4));
+    }
+  } // to edit array at specific part
   else {
     unknownCommand(text);
   }
@@ -120,3 +133,4 @@ function add(value) {
 function remove(value) {
   arr.splice(value, 1);
 }
+
