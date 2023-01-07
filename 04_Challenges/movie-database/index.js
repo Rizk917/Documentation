@@ -26,9 +26,7 @@ app.get("/time", (req, res) => {
 
   // current minutes
   let minutes = date_ob.getMinutes();
-  if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
+  1;
   //time time response
   const timeResponse = { status: 200, message: hours + ":" + minutes };
   res.send(timeResponse);
@@ -69,26 +67,20 @@ app.get("/movies/read", (req, res) => {
   res.send({ status: 200, data: movies });
 });
 
-// sort by date
-let sortedByDate = movies.sort((p1, p2) =>
-  p1.year < p2.year ? 1 : p1.year > p2.year ? -1 : 0
-);
-// sort by ratig
-let sortedByRating = movies.sort((p1, p2) =>
-  p1.rating < p2.rating ? 1 : p1.rating > p2.rating ? -1 : 0
-);
-// sort by title
-let sortedByTitle = movies.sort((p1, p2) =>
-  p1.title < p2.title ? 1 : p1.title > p2.title ? -1 : 0
-);
 //route for specific sort
 app.get("/movies/read/:id", (req, res) => {
   console.log("ok");
   if (req.params.id === "by-date") {
+    // sort by date
+    let sortedByDate = movies.sort((p1, p2) => p1.year - p2.year);
     res.send({ status: 200, data: sortedByDate });
   } else if (req.params.id === "by-rating") {
+    // sort by rating
+    let sortedByRating = movies.sort((p1, p2) => p1.rating - p2.rating);
     res.send({ status: 200, data: sortedByRating });
   } else if (req.params.id === "by-title") {
+    // sort by title
+    let sortedByTitle = movies.sort((p1, p2) => p1.title - p2.title);
     res.send({ status: 200, data: sortedByTitle });
   }
 });
@@ -97,9 +89,9 @@ app.get("/movies/read/:id", (req, res) => {
 app.get("/movies/read/id/:id", (req, res) => {
   console.log("ok");
   const specificMovie = movies.find(
-    (specificMovie) => specificMovie.title == req.params.id
+    (specificMovie) =>
+      specificMovie.title.toLowerCase() == req.params.id.toLowerCase()
   );
-  // console.log(specificMovie)
   if (specificMovie) {
     res.send({ status: 200, data: specificMovie });
   } else {
@@ -112,9 +104,26 @@ app.get("/movies/read/id/:id", (req, res) => {
 });
 
 //route to create
-app.get("/movies/create", (req, res) => {
+
+// /movies/add?title=<TITLE>&year=<YEAR>&rating=<RATING>
+app.get("/movies/add", (req, res) => {
   console.log("ok");
-  res.send({ status: 200, message: "create" });
+  const t = req.query.title;
+  const y = req.query.year;
+  const r = req.query.rating;
+
+  if (!t || !y || y.length !== 4 || isNaN(y)) {
+    res.send({
+      status: 403,
+      error: true,
+      message: "you cannot create a movie without providing a title and a year",
+    });
+  } else {
+    if (!r) {
+      movies.push(t, y, 4);
+    } else movies.push(t, y, r);
+  }
+  res.send({ status: 200, data: movies });
 });
 
 //route to update
@@ -124,7 +133,24 @@ app.get("/movies/update", (req, res) => {
 });
 
 //route to delete
-app.get("/movies/delete", (req, res) => {
-  console.log("ok");
-  res.send({ status: 200, message: "delete" });
+app.get("/movies/delete/:id", (req, res) => {
+  const id = req.params.id;
+  // get specific id to delete
+  const index = movies.findIndex(
+    (movie) => movie.title.toLowerCase() == id.toLowerCase()
+  );
+
+  // If the movie was not found, send an error message
+  if (index === -1) {
+    return res.status(404).send({
+      error: true,
+      message: `The movie ${id} does not exist.`,
+    });
+  }
+
+  // Remove the movie from the array
+  movies.splice(index, 1);
+
+  // Send the updated list of movies as the response
+  res.send(movies);
 });
