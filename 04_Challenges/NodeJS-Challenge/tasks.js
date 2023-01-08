@@ -8,24 +8,22 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
-var filename=process.argv[2]?process.argv[2] : "Database.json"
+var filename = process.argv[2] ? process.argv[2] : "database.json";
 function startApp(name) {
   process.stdin.resume();
   process.stdin.setEncoding("utf8");
   process.stdin.on("data", onDataReceived);
-  console.log(`Welcome to ${name}'s application!`);
+  console.log(`Welcome to ${name}'s applicatioen!`);
   console.log("--------------------");
-  let fs = require('fs');
-  const path=require('path');
-  try{
-    let data=fs.readFileSync(path.join(__dirname, 'db',filename),'utf-8')
-    let obj=JSON.parse(data)
-    arraylist=obj;
-  }
-  catch(err){
+  let fs = require("fs");
+  const path = require("path");
+  try {
+    let data = fs.readFileSync(path.join(__dirname, "db", filename), "utf8");
+    let obj = JSON.parse(data);
+    arr = obj;
+  } catch (err) {
     console.log(err);
   }
-
 }
 
 /**
@@ -81,7 +79,7 @@ function onDataReceived(text) {
       text.replace("\n", "");
       edit(arr.length - 1, text.substring(4));
     } // to edit array last
-  } else if (text === "check\n") {   
+  } else if (text === "check\n") {
     //
     console.log("error!");
   } else if (text.substring(0, 5) === "check") {
@@ -123,6 +121,16 @@ function unknownCommand(c) {
  * @returns {void}
  */
 function quit() {
+  let fs = require("fs");
+  const path = require("path");
+  const xyz = JSON.stringify(arr);
+  fs.writeFileSync(path.join(__dirname, "db", filename), xyz, (err) => {
+    if (err) throw err;
+  });
+  process.on("uncaughtException", (err) => {
+    console.error("error while saving");
+  });
+
   console.log("Quitting now, goodbye!");
   process.exit();
 }
@@ -140,7 +148,7 @@ function help() {
 function hello(newName) {
   console.log("hello " + newName + "!");
 }
-const arr = ["eat batata", "drink pepsi", "wash hands"];
+
 
 //list function
 function list() {
@@ -154,7 +162,7 @@ function list() {
 //add function to add items to list
 function add(value) {
   arr.push(value);
-  arrCheck.push('[]');
+  arrCheck.push("[]");
 }
 // to remove item from list
 function remove(value) {
