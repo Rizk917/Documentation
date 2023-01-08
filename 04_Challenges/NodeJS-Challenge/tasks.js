@@ -8,12 +8,24 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
+var filename=process.argv[2]?process.argv[2] : "Database.json"
 function startApp(name) {
   process.stdin.resume();
   process.stdin.setEncoding("utf8");
   process.stdin.on("data", onDataReceived);
   console.log(`Welcome to ${name}'s application!`);
   console.log("--------------------");
+  let fs = require('fs');
+  const path=require('path');
+  try{
+    let data=fs.readFileSync(path.join(__dirname, 'db',filename),'utf-8')
+    let obj=JSON.parse(data)
+    arraylist=obj;
+  }
+  catch(err){
+    console.log(err);
+  }
+
 }
 
 /**
@@ -69,7 +81,8 @@ function onDataReceived(text) {
       text.replace("\n", "");
       edit(arr.length - 1, text.substring(4));
     } // to edit array last
-  } else if (text === "check\n") {
+  } else if (text === "check\n") {   
+    //
     console.log("error!");
   } else if (text.substring(0, 5) === "check") {
     // check task
@@ -131,9 +144,9 @@ const arr = ["eat batata", "drink pepsi", "wash hands"];
 
 //list function
 function list() {
-  if (arrCheck[arr.length - 1] === undefined) {
-    arrCheck[arr.length - 1] = "[]";
-  }
+  // if (arrCheck[arr.length - 1] === undefined) {
+  //   arrCheck[arr.length - 1] = "[]";
+  // }
   for (let x = 0; x < arr.length; x++) {
     console.log(x + "." + arrCheck[x] + arr[x]);
   }
@@ -141,10 +154,12 @@ function list() {
 //add function to add items to list
 function add(value) {
   arr.push(value);
+  arrCheck.push('[]');
 }
 // to remove item from list
 function remove(value) {
   arr.splice(value, 1);
+  arrCheck.splice(value, 1);
 }
 //edit function
 function edit(value, text) {
