@@ -43,6 +43,7 @@ app.get("/hello/:id", (req, res) => {
 app.get("/search", (req, res) => {
   console.log("ok");
   if (req.query.s) {
+    //search query
     res.send({ status: 200, message: "OK", data: req.query.s });
   } else {
     res.send({
@@ -123,6 +124,7 @@ app.get("/movies/add", (req, res) => {
       movies.push(t, y, 4);
     } else movies.push(t, y, r);
   }
+  // Send the updated list of movies as the response
   res.send({ status: 200, data: movies });
 });
 
@@ -135,22 +137,45 @@ app.get("/movies/update", (req, res) => {
 //route to delete
 app.get("/movies/delete/:id", (req, res) => {
   const id = req.params.id;
-  // get specific id to delete
+  // get specific id to index
   const index = movies.findIndex(
     (movie) => movie.title.toLowerCase() == id.toLowerCase()
   );
-
   // If the movie was not found, send an error message
   if (index === -1) {
-    return res.status(404).send({
+    res.send({
+      status: 404,
       error: true,
       message: `The movie ${id} does not exist.`,
     });
   }
-
   // Remove the movie from the array
   movies.splice(index, 1);
 
   // Send the updated list of movies as the response
-  res.send(movies);
+  res.send({ status: 200, data: movies });
+});
+
+// route for update
+app.get("/movies/update/:id", (req, res) => {
+  console.log("ok");
+  const id = req.params.id;
+  const newTitle = req.query.title;
+  const newRating = req.query.rating;
+  const newYear = req.query.year;
+  // get specific index
+  const index = movies.findIndex(
+    (movie) => movie.title.toLowerCase() == id.toLowerCase()
+  );
+  // to update title
+  if (newTitle) movies[index].title = newTitle;
+  
+  //to update year
+  if (newYear && newYear.length == 4) movies[index].year = newYear;
+
+  // to update rating
+  if (newRating) movies[index].rating = newRating;
+
+  // Send the updated list of movies as the response
+  res.send({ status: 200, data: movies });
 });
