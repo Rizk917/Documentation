@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const MongoClient    = require('mongodb').MongoClient;
+const bodyParser     = require('body-parser')
 const port = 3000; // port can be put in .env
 let date_ob = new Date();
 // openining the port
