@@ -107,7 +107,7 @@ app.get("/movies/read/id/:id", (req, res) => {
 //route to create
 
 // /movies/add?title=<TITLE>&year=<YEAR>&rating=<RATING>
-app.get("/movies/add", (req, res) => {
+app.post("/movies/add", (req, res) => {
   console.log("ok");
   const t = req.query.title;
   const y = req.query.year;
@@ -128,14 +128,9 @@ app.get("/movies/add", (req, res) => {
   res.send({ status: 200, data: movies });
 });
 
-//route to update
-app.get("/movies/update", (req, res) => {
-  console.log("ok");
-  res.send({ status: 200, message: "update" });
-});
 
 //route to delete
-app.get("/movies/delete/:id", (req, res) => {
+app.delete("/movies/delete/:id",(req, res) => {
   const id = req.params.id;
   // get specific id to index
   const index = movies.findIndex(
@@ -153,11 +148,11 @@ app.get("/movies/delete/:id", (req, res) => {
   movies.splice(index, 1);
 
   // Send the updated list of movies as the response
-  res.send({ status: 200, data: movies });
+  return res.send({ movies });
 });
 
 // route for update
-app.get("/movies/update/:id", (req, res) => {
+app.put("/movies/update/:id", (req, res) => {
   console.log("ok");
   const id = req.params.id;
   const newTitle = req.query.title;
@@ -169,7 +164,7 @@ app.get("/movies/update/:id", (req, res) => {
   );
   // to update title
   if (newTitle) movies[index].title = newTitle;
-  
+
   //to update year
   if (newYear && newYear.length == 4) movies[index].year = newYear;
 
